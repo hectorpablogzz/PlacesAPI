@@ -60,7 +60,7 @@ class PlaceViewModel {
     
     func loadAPI() async throws {
         // 1. URL
-        guard let url = URL(string: "https://tec-actions-test-production.up.railway.app/places") else {
+        guard let url = URL(string: "http://127.0.0.1:5000/places") else {
             print("Invalid URL")
             return
         }
