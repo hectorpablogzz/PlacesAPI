@@ -11,16 +11,24 @@ import Foundation
 class PlaceViewModel {
     
     var arrPlaces = [Place]()
+    var isLoading = true
+    var hasError = false
     
     init() {
         
         Task{
-            try await loadAPI()
+            do {
+                try await loadAPI()
+            }
+            catch {
+                self.isLoading = false
+                self.hasError = true
+                print("API Error")
+            }
         }
         
         //arrPlaces = load("placesData.json")
-        
-        print(arrPlaces)
+    
         
        /* var place = Place(name: "ChichenItza", title: "Chichen Itza", description: "Chichen Itza is a famous ancient Mayan city in Mexico, known for its impressive pyramid Kukulkan. It was a major center of politics, religion, and astronomy, and is now one of the New Seven Wonders of the World.", videoURL: "https://www.youtube.com/watch?v=sO7U78pUr34", imageName: ["ChichenItza", "ChichenItza2", "ChichenItza3"])
         arrPlaces.append(place)
@@ -70,11 +78,17 @@ class PlaceViewModel {
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            self.isLoading = false
+            self.hasError = true
             print("error")
             return
         }
         
         let results = try JSONDecoder().decode([Place].self, from: data)
+        
+        self.isLoading = false
+        
+        print(results)
         
         self.arrPlaces = results
 
