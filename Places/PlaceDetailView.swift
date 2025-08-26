@@ -1,32 +1,44 @@
 //
 //  PlaceDetailView.swift
-//  Places
+//  PlacesHP
 //
-//  Created by Elvia Rosas on 18/08/25.
+//  Created by Héctor Pablo González on 18/08/25.
 //
 
 import SwiftUI
 
 struct PlaceDetailView: View {
     let place : Place
-    
     var body: some View {
-        
-        VStack{
+        VStack {
+            
             Image(place.imageName[0])
                 .resizable()
                 .scaledToFit()
-            
-            Text(place.title)
+            Text(place.name)
+                .font(.title)
+                .fontWeight(.bold)
+                .fontDesign(.rounded)
             Text(place.description)
+                .multilineTextAlignment(.leading)
+                .padding()
+            Spacer()
             Link(destination: URL(string: place.videoURL)!) {
-                Text("Video")
+                HStack {
+                    Image(systemName: "play.circle")
+                    Text("Open Video")
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
             }
+            
             
         }
     }
 }
 
 #Preview {
-    PlaceDetailView(place: Place(name: "ChichenItza", title: "Chichen Itza", description: "Description", videoURL: "https://www.youtube.com/watch?v=sO7U78pUr34", imageName: ["ChichenItza"]))
+    PlaceDetailView(place: Place(name: "Chipinque", title: "Chipinque", description: "Desc", videoURL: "video", imageName: ["Chipinque"]))
 }

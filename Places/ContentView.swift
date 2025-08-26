@@ -15,6 +15,10 @@ struct ContentView: View {
     var body: some View {
         
         NavigationStack {
+            Text("Monterrey Travel Guide")
+                .font(.title)
+                .fontWeight(.bold)
+                .fontDesign(.rounded)
             
             VStack {
 
@@ -30,7 +34,6 @@ struct ContentView: View {
                     }
                 }
             }
-            .padding()
             
         }
         
